@@ -7,6 +7,22 @@ class Fraction:
         if self.denominator == 0:
             raise ZeroDivisionError
 
+    def __add__(self, other):
+        if type(other) == type(5) or type(other) == type(5.0): # check if other is an int or a float
+            return Fraction(self.denominator * other + self.numerator, self.denominator)
+        elif type(other) == type(Fraction(1, 1)):
+            return Fraction(self.numerator*other.denominator + other.numerator*self.denominator, self.denominator*self.denominator)
+        else:
+            raise TypeError('can only concatenate fraction to int, float or fraction')
+
+    def __mul__(self, other):
+        if type(other) == type(int(5)) or type(other) == type(float(5.0)): # check if other is an int or float
+            return Fraction(self.numerator * other, self.denominator)
+        elif type(other) == type(Fraction(1, 2)): # check if other is an Fraction
+            return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
+        else:
+            raise TypeError('fractions can\'t be multiplyed with this type')
+
     def __repr__(self):
         return f'Fraction({self.numerator}, {self.denominator})'
 
@@ -24,11 +40,15 @@ class Fraction:
         self.numerator /= value
         self.denominator /= value
 
-    def expanding(self, value: float):
+    def expand(self, value: float):
         self.numerator *= value
         self.denominator *= value
 
-
+    def inverse(self):
+        numerator = self.numerator
+        denominator = self.denominator
+        self.numerator = denominator
+        self.denominator = numerator
 
 def gcd(a, b):
     r = a%b
@@ -46,6 +66,8 @@ def gcd(a, b):
     return gcd
 
 
-var = Fraction(3.74543, 4)
-var.reduce()
-print(var)
+def number_to_fraction(number):
+    result = Fraction(number, 1)
+    result.reduce()
+    return result
+
