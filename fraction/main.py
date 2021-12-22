@@ -23,6 +23,22 @@ class Fraction:
         else:
             raise TypeError('fractions can\'t be multiplyed with this type')
 
+    def __sub__(self, other):
+        if type(other) == type(Fraction(1, 2)):
+            return Fraction(self.numerator*other.denominator-other.numerator*self.denominator, self.denominator*other.denominator)
+        elif type(other) == type(5) or type(other) == type(5.0):
+            return Fraction(self.numerator-self.denominator*other, self.denominator)
+        else:
+            raise TypeError
+
+    def __div__(self, other):
+        if type(other) == type(5) or type(other) == type(5.0):
+            return Fraction(self.numerator, self.denominator*other)
+        elif type(other) == type(Fraction(1, 2)):
+            return Fraction(self.numerator*other.denominator, self.denominator*other.numerator)
+        else:
+            raise TypeError
+
     def __repr__(self):
         return f'Fraction({self.numerator}, {self.denominator})'
 
@@ -70,4 +86,3 @@ def number_to_fraction(number):
     result = Fraction(number, 1)
     result.reduce()
     return result
-
