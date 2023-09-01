@@ -6,4 +6,4 @@ Move the _main.py_ file into your pythonpath e.g. _C:/Python39/Lib_ and rename i
 There is the fraction class which you can define by: **Fraction(numerator, denominator)**.
 You can convert the fraction to an string, intager and a float.  
 On the class there are these methods:
-- **reduce**:  This methode has one optinal parameter the value with 
+- **reduce**:  This methode has one optoinal parameter the value with 
